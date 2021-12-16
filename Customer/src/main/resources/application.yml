@@ -1,0 +1,29 @@
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        enabled: true
+        errorThresholdPercentage: 50
+        requestVolumeThreshold: 4
+        sleepWindowInMilliseconds: 120000
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000
+server:
+  port: 1115
+  servlet:
+    context-path: /Customer
+spring:
+  application:
+    name: CustomerMS
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/CustomerDB
+  zipkin:
+    base-url: http://localhost:9411/
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+ 
+ 
