@@ -15,6 +15,7 @@ import com.customer.dto.CustomerDTO;
 import com.customer.dto.LoginDTO;
 import com.customer.dto.PlanDTO;
 import com.customer.entity.Customer;
+import com.customer.feign.PlanFeign;
 import com.customer.service.impl.CustomerServiceImpl;
 
 
@@ -24,7 +25,9 @@ public class CustomerRestController {
 	@Autowired
 	CustomerServiceImpl service;
 	@Autowired
-	RestTemplate restTemplate;
+	PlanFeign planFeign;
+	//RestTemplate restTemplate;
+	
 	@Autowired
 	CustomerCircuit circuit;
 	
@@ -50,7 +53,8 @@ public class CustomerRestController {
 	{
 	
 		CustomerDTO customerDTO=service.viewProfile(phoneNumber);
-		PlanDTO planDTO=restTemplate.getForObject(PLAN_URL,PlanDTO.class,customerDTO.getPlanId());
+		//PlanDTO planDTO=restTemplate.getForObject(PLAN_URL,PlanDTO.class,customerDTO.getPlanId());
+		  PlanDTO planDTO=planFeign.getPlanData(customerDTO.getPlanId());
 		customerDTO.setCurrentPlan(planDTO);
 		//for creating hystrix//
 	   // List<Long> friendsContactNumbers=restTemplate.getForObject(FRIEND_URL, List.class, phoneNumber);

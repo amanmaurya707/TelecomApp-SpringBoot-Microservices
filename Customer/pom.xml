@@ -69,19 +69,20 @@
 <!-- 		Pom dependency contains zipkin dependency, zipkin-server is not configured, and 9411 is submitted by default -->
 
 		
-<dependency>
+   <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-sleuth</artifactId>
-
-</dependency>
+  </dependency>
 		
 	<dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-sleuth-zipkin</artifactId>
-
-</dependency>	
-		
-		
+    </dependency>	
+	<!--add openfeign depedency for inter service communication  -->	
+	<dependency>
+	  <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+	</dependency>	
 		
 
 	</dependencies>
