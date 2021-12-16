@@ -1,0 +1,41 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2112/eureka
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+server:
+  port: 2113
+spring:
+  application:
+    name: ApiGateway
+  cloud:
+    gateway:
+      default-filters:
+      - RewritePath=/(?<base>.*?)/(?<segment>.*), /$\{segment} #if not added then show 404 error
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: CUSTOMERMS
+        uri: lb://CUSTOMERMS
+        predicates:
+         - Path=/c/**
+      - id: FRIENDMS
+        uri: lb://FRIENDMS
+        predicates:
+         - Path=/f/**
+      - id: PLANMS
+        uri: lb://PLANMS
+        predicates:
+         - Path=/p/**
+      - id: CALLDETAILSMS
+        uri: lb://CALLDETAILSMS
+        predicates:
+         - Path=/cd/**
+         
+      
+   
+        
